@@ -72,7 +72,7 @@ build_image() {
 
   docker build \
     --tag="ansible-testing:${distribution}_${version}" \
-    "${image}" | tee --append "${logfile}"
+    "${image}" | tee -a "${logfile}"
 
 }
 
@@ -92,7 +92,7 @@ check_args() {
 #
 # Prints all arguments on the standard output stream
 info() {
-  printf "${yellow}>>> %s${reset}\n" "${*}" | tee --append "${logfile}"
+  printf "${yellow}>>> %s${reset}\n" "${*}" | tee -a "${logfile}"
 }
 
 # Usage: debug [ARG]...
@@ -101,14 +101,14 @@ info() {
 # if debug output is enabled
 debug() {
   [ "${debug}" != 'on' ] || \
-    printf "${cyan}### %s${reset}\n" "${*}" | tee --append "${logfile}"
+    printf "${cyan}### %s${reset}\n" "${*}" | tee -a "${logfile}"
 }
 
 # Usage: error [ARG]...
 #
 # Prints all arguments on the standard error stream
 error() {
-  printf "${red}!!! %s${reset}\n" "${*}" 1>&2 | tee --append "${logfile}"
+  printf "${red}!!! %s${reset}\n" "${*}" 1>&2 | tee -a "${logfile}"
 }
 
 # Print usage message on stdout by parsing start of script comments
